@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const accessControl = require('./middleware/acessControl')
 // middlewares
 app.use(accessControl)
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 
 // routes
 const post = require('./routes/post.js')
