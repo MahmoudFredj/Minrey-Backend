@@ -1,0 +1,5 @@
+{
+    "dbConnectLocal":"mongodb://localhost:27017/rayray",
+    "privateKey":"relax_this_is_for_job_hiring",
+    "dbConnectProduction":""
+}
