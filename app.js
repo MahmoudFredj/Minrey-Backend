@@ -19,7 +19,7 @@ app.use('/api/comment', comment)
 app.use('/api/category', category)
 
 // connecting mongoose
-const dbUrl = config.dbConnectLocal
+const dbUrl = config.dbConnectProduction
 mongoose
   .connect(dbUrl, {
     useNewUrlParser: true,
