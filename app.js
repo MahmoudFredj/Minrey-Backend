@@ -12,11 +12,13 @@ const post = require('./routes/post.js')
 const authentication = require('./routes/authentication.js')
 const comment = require('./routes/comment.js')
 const category = require('./routes/category')
+const user = require('./routes/user')
 
 app.use('/api/post', post)
 app.use('/api/authentication', authentication)
 app.use('/api/comment', comment)
 app.use('/api/category', category)
+app.use('/api/user', user)
 
 // connecting mongoose
 const dbUrl = config.dbConnectProduction
@@ -25,12 +27,14 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() =>
-    console.log(
-      '\x1b[32m',
-      `[mongoose] db connected on ${dbUrl} ...`,
-      '\x1b[37m',
-    ),
+  .then(
+    () =>
+      console.log(
+        '\x1b[32m',
+        `[mongoose] db connected on ${dbUrl} ...`,
+        '\x1b[37m',
+      ),
+    mongoose.set('useFindAndModify', false),
   )
   .catch((err) =>
     console.log(

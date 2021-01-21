@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
   isAdmin: {
     type: Boolean,
     default: false,
@@ -28,6 +32,7 @@ const validationSchema = Joi.object({
   password: Joi.string().min(5).max(255).required(),
   name: Joi.string().min(5).max(125).required(),
   birthDate: Joi.date(),
+  image: Joi.string(),
 })
 
 const validateLogin = (user) => {

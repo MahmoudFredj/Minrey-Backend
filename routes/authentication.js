@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
   )
   setTimeout(() => {
     res.send(token)
-  }, 3000)
+  }, 2000)
 })
 
 router.post('/register', async (req, res) => {
@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
   const password = req.body.password
   const salt = await bcrypt.genSalt(10)
   const hashed = await bcrypt.hash(password, salt)
-
+  console.log(req.file)
   //creating new user
   const user = new User({
     email: req.body.email,
@@ -59,6 +59,6 @@ router.post('/register', async (req, res) => {
   )
   setTimeout(() => {
     res.send(token)
-  }, 3000)
+  }, 2000)
 })
 module.exports = router

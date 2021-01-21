@@ -30,6 +30,8 @@ router.get('/:pageNumber/:pageSize', async (req, res) => {
 })
 
 router.get('/:category/:pageNumber/:pageSize', async (req, res) => {
+  if (!req.params.category === 'undefined')
+    return res.status(400).send('invalid category')
   const category = req.params.category
   const pageNumber = parseInt(req.params.pageNumber)
   const pageSize = parseInt(req.params.pageSize)
