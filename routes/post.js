@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 router.get('/:pageNumber/:pageSize', async (req, res) => {
-  const nn = 0
   const pageNumber = parseInt(req.params.pageNumber)
   const pageSize = parseInt(req.params.pageSize)
 
