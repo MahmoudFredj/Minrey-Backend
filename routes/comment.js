@@ -111,7 +111,6 @@ router.put('/like', [auth], async (req, res) => {
     ).select({
       likes: 1,
     })
-
     const index = result.likes.indexOf(req.user._id)
     result.likes.splice(index, 1)
   } else {
@@ -130,6 +129,11 @@ router.put('/like', [auth], async (req, res) => {
     comment: req.body.mother,
   }
   res.send(sendReplay)
+})
+
+router.delete('', [auth], async (req, res) => {
+  const result = await Comment.findOneAndDelete({ _id: req.body._id })
+  res.send(result)
 })
 
 module.exports = router
