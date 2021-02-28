@@ -1,8 +1,23 @@
 const router = require('express').Router()
 const auth = require('../middleware/auth')
 const { User } = require('../models/user')
+const fs = require('fs')
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'upload/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname)
+  },
+})
+
+// upload with storage
+
+const upload = multer({ storage })
 
 router.get('/:id', async (req, res) => {
   const userId = req.params.id
@@ -74,6 +89,21 @@ router.put('/profile', auth, async (req, res) => {
       birthDate: req.body.birthDate,
     },
   )
+  res.send(result)
+})
+
+router.put('/img', [auth, upload.single('image')], async (req, res) => {
+  const userId = req.user._id
+  const result = await User.findOneAndUpdate(
+    { _id: userId },
+    {
+      image: {
+        data: fs.readFileSync(req.file.path),
+        contentType: req.file.mimetype,
+      },
+    },
+  )
+
   res.send(result)
 })
 
